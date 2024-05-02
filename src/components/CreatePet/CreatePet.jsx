@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import * as petsApi from '../../utilities/cats-api';
+import * as petsApi from '../../utilities/pets-api';
 
-export default function CreateCatForm() {
+export default function CreatePetForm() {
   const [formData, setFormData] = useState({
     petName: '',
-    // health: 5, // Default health value
-    // emotion: 'happy', // Default emotion value
+    petType: '',
+    // health: 5,
     // careInstructions: '',
     // buttons: '',
-    // type: '',
     // infoPopup: ''
   });
 
@@ -23,22 +22,19 @@ export default function CreateCatForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await petsApi.createCat(formData);
+      await petsApi.createPet(formData);
       // Optionally, you can reset the form after submission
       setFormData({
         petName: '',
+        petType: '',
         // health: 5,
-        // emotion: 'happy',
         // careInstructions: '',
         // buttons: '',
-        // type: '',
         // infoPopup: ''
       });
       // Handle success, e.g., show a success message
     } catch (error) {
-      console.error('Error creating cat:', error);
-      // Handle error, e.g., show an error message
-      alert('Error creating cat. Please try again.');
+      console.error('Error creating pet:', error);
     }
   };
 
@@ -55,7 +51,7 @@ export default function CreateCatForm() {
         />
       </label>
       {/* Add other input fields for health, emotion, careInstructions, buttons, type, infoPopup */}
-      <button type="submit">Create Cat</button>
+      <button type="submit">Create Pet</button>
     </form>
   );
 }

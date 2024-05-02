@@ -1,4 +1,4 @@
-const { Cat } = require('../../models/cat');
+const { Pet } = require('../../models/pet');
 
 module.exports = {
   index,
@@ -10,27 +10,27 @@ module.exports = {
 
 async function index(req, res) {
   try {
-    console.log(Cat)
-  const cats = await Cat.find({});
+    console.log(Pet)
+  const pets = await Pet.find({});
   // re-sort based upon the sortOrder of the populated categories
-  res.json(cats);
+  res.json(pets);
   } catch (error) {
   res.status(500).json({ error: error.message });
   }
 }  
 
 async function show(req, res) {
-  const cat = await Cat.findById(req.params.id);
-  res.json(cat);
+  const pet = await Pet.findById(req.params.id);
+  res.json(pet);
 }
 
 async function create(req, res) {
   try {
-    console.log(Cat)
+    console.log(Pet)
     // req.body.user = req.user;
     console.log(req.body)
-    const cat = await Cat.create(req.body);
-    res.json(cat);
+    const pet = await Pet.create(req.body);
+    res.json(pet);
   } catch (err) {
     console.log(err)
     res.status(400).json(err);
@@ -39,11 +39,11 @@ async function create(req, res) {
 
 async function update(req, res) {
   try {
-    const cat = await Cat.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!cat) {
-      return res.status(404).json({ message: "Cat not found" });
+    const pet = await Pet.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!pet) {
+      return res.status(404).json({ message: "Pet not found" });
     }
-    res.json(cat);
+    res.json(pet);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -51,11 +51,11 @@ async function update(req, res) {
 
 async function remove(req, res) {
   try {
-    const cat = await Cat.findByIdAndRemove(req.params.id);
-    if (!cat) {
-      return res.status(404).json({ message: "Cat not found" });
+    const pet = await Pet.findByIdAndRemove(req.params.id);
+    if (!pet) {
+      return res.status(404).json({ message: "Pet not found" });
     }
-    res.json({ message: "Cat removed successfully" });
+    res.json({ message: "Pet removed successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

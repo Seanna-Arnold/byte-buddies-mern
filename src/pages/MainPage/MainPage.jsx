@@ -1,73 +1,74 @@
 import React, { useState, useEffect } from "react";
-import * as petsApi from "../../utilities/cats-api";
-import CreateCat from "../../components/CreateCat/CreateCat";
+import { Link } from 'react-router-dom';
+import * as petsApi from "../../utilities/pets-api";
+import CreateCat from "../../components/CreatePet/CreatePet";
 
 export default function MainPage() {
-  const [cats, setCats] = useState([]);
+  const [pets, setPets] = useState([]);
   const [changeState, setChangeState] = useState(true);
 
   useEffect(() => {
-    fetchCats();
+    fetchPets();
   }, [changeState]);
 
-  async function fetchCats() {
+  async function fetchPets() {
     try {
-      const fetchedCats = await petsApi.getAll();
-      setCats(fetchedCats);
+      const fetchedPets = await petsApi.getAll();
+      setPets(fetchedPets);
     } catch (error) {
-      console.error("Error fetching cats:", error);
+      console.error("Error fetching pets:", error);
     }
   }
 
-  async function addCat(cat) {
+  async function addPets(pet) {
     try {
-      await petsApi.createCat(cat);
-      fetchCats();
+      await petsApi.createPet(pet);
+      fetchPets();
       setChangeState(prevState => !prevState);
     } catch (error) {
-      console.error("Error adding cat:", error);
+      console.error("Error adding pet:", error);
     }
   }
 
   async function handleDelete(id) {
     try {
-      await petsApi.deleteCat(id);
-      fetchCats();
+      await petsApi.deletePet(id);
+      fetchPets();
       setChangeState(prevState => !prevState);
     } catch (error) {
-      console.error("Error deleting cat:", error);
+      console.error("Error deleting pet:", error);
     }
   }
   async function handleUpdate(id, newName) {
     try {
-      await petsApi.updateCat(id, { petName: newName });
-      fetchCats();
+      await petsApi.updatePet(id, { petName: newName });
+      fetchPets();
       setChangeState(prevState => !prevState);
     } catch (error) {
-      console.error("Error updating cat name:", error);
+      console.error("Error updating pet name:", error);
     }
   }
 
   return (
     <>
       <h1>Pet Dashboard</h1>
-      <CreateCat addCat={addCat} />
-      {cats.length !== 0 ?
+      <CreateCat addPet={addPets} />
+      {pets.length !== 0 ?
       <div>
-        {cats.map(cat => (
-          <div key={cat._id}>
-          <a href='/cats'> Care for {cat.petName}</a>
+        {pets.map(pet => (
+          <div key={pet._id}>
+          <Link to= {`/pets/${pet._id}`}> Care for {pet.petName}</Link>
           <input
             type="text"
-            value={cat.petName}
-            onChange={(e) => handleUpdate(cat._id, e.target.value)}
+            value={pet.petName}
+            onChange={(e) => handleUpdate(pet._id, e.target.value)}
           />
-          <button onClick={() => handleDelete(cat._id)}>Delete</button>
+          <button onClick={() => handleDelete(pet._id)}>Delete</button>
         </div>
         ))}
       </div>
       :
-      <p>No cats yet</p>
+      <p>No pets yet</p>
         }
     </>
   );
