@@ -56,17 +56,14 @@ export default function CatGame() {
 
   // Function shuffles and sets new instruction index
   const shuffleInstruction = (buttonIndex) => {
-    // Check if the button index matches the index of the displayed instruction
     if (buttonIndex === currentInstructionIndex) {
       if (health < 5) {
-        setHealth(prevHealth => Math.min(prevHealth + 1, 5)); 
+        setHealth(prevHealth => Math.min(prevHealth + 1, 5));
       }
-      // shuffle instruction
       const newIndex = Math.floor(Math.random() * catInstruction.length);
       setCurrentInstructionIndex(newIndex);
-      setCurrentFacts(catFactsArray[newIndex].facts); // Update the facts array
+      // setCurrentFacts(catFactsArray[newIndex].facts); // Update the facts array
     } else {
-      // Wrong button clicked, decrease health if not minimum
       if (health > 0) {
         setHealth(prevHealth => Math.max(prevHealth - 1, 0));
       }
@@ -78,27 +75,27 @@ export default function CatGame() {
       <h1>Cat Game</h1>
 
       <div className="details">
-        <div className="petInfo">
-          <h4>Pet Info</h4>
-          <p>Health: {health}❤️</p>
-        </div>
+    <div className="petInfo">
+      <h4>Pet Info</h4>
+      <p>Health: {health}❤️</p>
+    </div>
 
-        <ul className="careInstructions">
-          <CatInstruction careInstructions={[catInstruction[currentInstructionIndex]]} />
-          <ul>
-            {currentFacts.map((fact, index) => (
-              <li key={index}>{fact}</li>
-            ))}
-          </ul>
-        </ul>
-      </div>
+    <ul className="careInstructions">
+      <CatInstruction careInstructions={[catInstruction[currentInstructionIndex]]} />
+      <ul>
+        {currentFacts.map((fact, index) => (
+          <li key={index}>{fact}</li>
+        ))}
+      </ul>
+    </ul>
+  </div>
 
-      <div className="game">
-        <p>😸</p>
+  <div className="game">
+    <p>😸</p>
 
-        <h2>Cat Care Buttons</h2>
-        <CatButton buttons={catButton} onClick={shuffleInstruction} />
-      </div>
+    <h2>Cat Care Buttons</h2>
+    <CatButton buttons={catButton} onClick={shuffleInstruction} />
+  </div>
     </>
   );
 }

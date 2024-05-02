@@ -3,7 +3,8 @@ import { Routes, Route } from 'react-router-dom';
 import { getUser } from '../../utilities/users-service';
 import './App.css';
 import AuthPage from '../AuthPage/AuthPage';
-import CatGame from '../CatGame/CatGame';
+import MainPage from '../MainPage/MainPage';
+// import CatGame from '../CatGame/CatGame';
 import NavBar from '../../components/NavBar/NavBar';
 
 export default function App() {
@@ -17,9 +18,9 @@ export default function App() {
             <Routes>
               {/* Route components in here */}
               {/* <Route path="/orders/new" element={<NewOrderPage />} /> */}
-              <Route path="/" element={<CatGame />} />
+              {/* <Route path="/" element={<CatGame />} /> */}
+              <Route path="/" element={<MainPage />} />
             </Routes>
-              {/* <Route path="/cat" element={<CatGame />} /> */}
           </>
           :
           <AuthPage setUser={setUser} />
