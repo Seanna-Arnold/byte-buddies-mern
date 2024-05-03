@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import CatButton from '../../components/CatButton/CatButton';
 import CatInstruction from '../../components/CatInstruction/CatInstruction';
 import * as petsApi from "../../utilities/pets-api";
@@ -46,17 +47,20 @@ export default function CatGame() {
 
   const catFactsArray = catInstruction.map((instruction, index) => {
     const key = catButtons[index].toLowerCase(); //getting key corresponding to the button
-    console.log(catFact)
     return { instruction, facts: catFact[key] }; // Create object with instruction and corresponding facts
   });
 
   const [currentInstructionIndex, setCurrentInstructionIndex] = useState(0);
 
+  const [pet, setPet] = useState(null);
+
   const [health, setHealth] = useState(5);
 
   const [changeState] = useState(true);
 
-  const [currentFacts, setCurrentFacts] = useState(catFactsArray[currentInstructionIndex].facts);
+  const [currentFacts, setCurrentFacts] = useState(catFactsArray[currentInstructionIndex].facts[0]);
+
+  const {id} = useParams();
 
   // Function shuffles and sets new instruction index
   const shuffleInstruction = (buttonIndex) => {
@@ -85,29 +89,40 @@ export default function CatGame() {
   };
 
   useEffect(() => {
-    fetchPets();
-  }, [changeState]);
-
-  async function fetchPets() {
+    fetchPet();
+  }, []);
+  
+  async function fetchPet() {
     try {
-      const fetchedPets = await petsApi.getAll();
-      setPets(fetchedPets);
+      const fetchedPet = await petsApi.getPetById(id);
+      console.log(fetchedPet);
+      setPet(fetchedPet);
+      if (fetchedPet && fetchedPet.health) {
+        setHealth(fetchedPet.health);
+      }
     } catch (error) {
       console.error("Error fetching pets:", error);
     }
   }
+  
 
-  async function handleUpdate(id, newHealth) {
+  async function handleUpdate(newHealth) {
     try {
-      await petsApi.updatePet(id, { health: newHealth });
+      if (!pet || !pet._id) {
+        console.error("No pet ID found.");
+        return;
+      }
+      await petsApi.updatePet(pet._id, { health: newHealth });
+      console.log(pet._id)
     } catch (error) {
       console.error("Error updating pet health:", error);
     }
   }
+  
 
   return (
     <>
-      <h1>Cat Game</h1>
+      <h1>{pet ? pet.petName : "Cat Game"}</h1>
 
       <div className="details">
     <div className="petInfo">

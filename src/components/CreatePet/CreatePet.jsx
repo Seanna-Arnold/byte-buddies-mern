@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as petsApi from '../../utilities/pets-api';
 
 export default function CreatePetForm() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     petName: '',
-    petType: '',
-    // health: 5,
-    // careInstructions: '',
-    // buttons: '',
-    // infoPopup: ''
+    petType: '', // Adding petType field
+    health: 5,
   });
 
   const handleChange = (e) => {
@@ -22,16 +21,14 @@ export default function CreatePetForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await petsApi.createPet(formData);
+      const newPet = await petsApi.createPet(formData);
       // Optionally, you can reset the form after submission
       setFormData({
         petName: '',
-        petType: '',
-        // health: 5,
-        // careInstructions: '',
-        // buttons: '',
-        // infoPopup: ''
+        petType: '', // Reset petType field
+        health: 5,
       });
+      navigate(`/pets/${newPet._id}`);
       // Handle success, e.g., show a success message
     } catch (error) {
       console.error('Error creating pet:', error);
@@ -50,7 +47,20 @@ export default function CreatePetForm() {
           required
         />
       </label>
-      {/* Add other input fields for health, emotion, careInstructions, buttons, type, infoPopup */}
+      <label>
+        Pet Type:
+        <select
+          name="petType"
+          value={formData.petType}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Select Pet Type</option>
+          <option value="cat">Cat</option>
+          <option value="dog">Dog</option>
+        </select>
+      </label>
+      {/* Add other input fields for health, emotion, careInstructions, buttons, infoPopup */}
       <button type="submit">Create Pet</button>
     </form>
   );

@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 const petSchema = new Schema({
     petName: { type: String },
-    health: { type: Number, max: 5, min: 3 },
+    health: { type: Number, max: 5, min: 0, required: true },
     petType: { type: String, enum: ['cat', 'dog'] }, }, 
     { timeStamps: true }
 );
