@@ -51,15 +51,10 @@ export default function CatGame() {
   });
 
   const [currentInstructionIndex, setCurrentInstructionIndex] = useState(0);
-
   const [pet, setPet] = useState(null);
-
   const [health, setHealth] = useState(5);
-
   const [changeState] = useState(true);
-
   const [currentFacts, setCurrentFacts] = useState(catFactsArray[currentInstructionIndex].facts[0]);
-
   const {id} = useParams();
 
   // Function shuffles and sets new instruction index
@@ -104,7 +99,6 @@ export default function CatGame() {
       console.error("Error fetching pets:", error);
     }
   }
-  
 
   async function handleUpdate(newHealth) {
     try {
@@ -113,36 +107,47 @@ export default function CatGame() {
         return;
       }
       await petsApi.updatePet(pet._id, { health: newHealth });
-      console.log(pet._id)
+      setHealth(newHealth);
     } catch (error) {
       console.error("Error updating pet health:", error);
     }
   }
-  
 
   return (
     <>
       <h1>{pet ? pet.petName : "Cat Game"}</h1>
 
-      <div className="details">
-    <div className="petInfo">
-      <h4>Pet Info</h4>
-      <p>Health: {health}❤️</p>
-    </div>
+      {health > 0 && (
+        <div className="details">
+          <div className="petInfo">
+            <h4>Pet Info</h4>
+            <p>Health: {health}❤️</p>
+            {health === 1 && <p>You're about to kill me</p>}
+          </div>
 
-    <ul className="careInstructions">
-      <h2>Instructions</h2>
-      <CatInstruction careInstructions={[catInstruction[currentInstructionIndex]]} />
-      <ul>
-        {currentFacts}
-      </ul>
-    </ul>
-  </div>
+          <ul className="careInstructions">
+            <h2>Instructions</h2>
+            <CatInstruction careInstructions={[catInstruction[currentInstructionIndex]]} />
+            <ul>
+              {currentFacts}
+            </ul>
+          </ul>
+        </div>
+      )}
 
-  <div className="game">
-    <h2>Cat Care Buttons</h2>
-    <CatButton buttons={catButtons} onClick={shuffleInstruction} />
-  </div>
+      {health <= 0 && (
+        <>
+        <p>You killed me, how could you?</p>
+        <p>(Don't worry, we can start over, just hit refresh)</p>
+        </>
+      )}
+
+      {health > 0 && (
+        <div className="game">
+          <h2>Cat Care Buttons</h2>
+          <CatButton buttons={catButtons} onClick={shuffleInstruction} />
+        </div>
+      )}
     </>
   );
 }
