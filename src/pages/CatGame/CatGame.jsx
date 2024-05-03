@@ -1,10 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import './CatGame.css'
 import { useParams } from 'react-router-dom';
 import CatButton from '../../components/CatButton/CatButton';
 import CatInstruction from '../../components/CatInstruction/CatInstruction';
 import * as petsApi from "../../utilities/pets-api";
+import lowHealthImage from '../../catGameImages/lowHealthImage.jpg';
+import mediumHealthImage from '../../catGameImages/mediumHealthImage.jpg';
+import highHealthImage from '../../catGameImages/highHealthImage.jpg';
+import zeroHealthImage from '../../catGameImages/zeroHealthImage.jpg';
 
 export default function CatGame() {
+  const healthImages = {
+    0: zeroHealthImage, // Add image for health level 0
+    1: lowHealthImage,
+    2: lowHealthImage,
+    3: mediumHealthImage,
+    4: mediumHealthImage,
+    5: highHealthImage,
+  };
+
   const catButtons = ['Hydrate', 'Feed', 'Snuggle', 'VetVisit', 'Play', 'CleanLitterBox', 'CutNailsAndBrushFur'];
   const catInstruction = ['There\'s no more water!', 'My tummy is growling', 'I wanna cuddle', 'I feel...sick', 'Zoomies!!!', 'Litter box is getting stanky', 'Hair is everywhere and I\'m scratching up the couch'];
   const catFact = {
@@ -52,7 +66,8 @@ export default function CatGame() {
 
   const [currentInstructionIndex, setCurrentInstructionIndex] = useState(0);
   const [pet, setPet] = useState(null);
-  const [health, setHealth] = useState(5);
+  const [health, setHealth] = useState(5); // State variable to track health
+  const [currentImage, setCurrentImage] = useState(highHealthImage); 
   const [changeState] = useState(true);
   const [currentFacts, setCurrentFacts] = useState(catFactsArray[currentInstructionIndex].facts[0]);
   const {id} = useParams();
@@ -86,6 +101,10 @@ export default function CatGame() {
   useEffect(() => {
     fetchPet();
   }, []);
+
+  useEffect(() => {
+    setCurrentImage(healthImages[health]);
+  }, [health, healthImages]);
   
   async function fetchPet() {
     try {
@@ -116,6 +135,7 @@ export default function CatGame() {
   return (
     <>
       <h1>{pet ? pet.petName : "Cat Game"}</h1>
+      <img src={currentImage} alt="Pet Image" />
 
       {health > 0 && (
         <div className="details">

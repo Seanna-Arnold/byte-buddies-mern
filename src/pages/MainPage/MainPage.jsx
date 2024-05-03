@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import * as petsApi from "../../utilities/pets-api";
 import CreateCat from "../../components/CreatePet/CreatePet";
+import ChatBot from "../ChatBot/ChatBot";
 
 export default function MainPage() {
   const [pets, setPets] = useState([]);
@@ -52,6 +53,7 @@ export default function MainPage() {
   return (
     <>
       <h1>Pet Dashboard</h1>
+      <br></br>
       <CreateCat addPet={addPets} />
       {pets.length !== 0 ?
       <div>
@@ -69,7 +71,8 @@ export default function MainPage() {
       </div>
       :
       <p>No pets yet</p>
-        }
+    }
+    <ChatBot />
     </>
   );
 }
