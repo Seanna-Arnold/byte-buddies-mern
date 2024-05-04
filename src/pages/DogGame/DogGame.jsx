@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
+// import './CatGame.css'
 import { useParams } from 'react-router-dom';
 import CatButton from '../../components/CatButton/CatButton';
-import ChatBot from '../ChatBot/ChatBot';
-
 import CatInstruction from '../../components/CatInstruction/CatInstruction';
 import * as petsApi from "../../utilities/pets-api";
 import lowHealthImage from '../../catGameImages/lowHealthImage.jpg';
@@ -10,9 +9,9 @@ import mediumHealthImage from '../../catGameImages/mediumHealthImage.jpg';
 import highHealthImage from '../../catGameImages/highHealthImage.jpg';
 import zeroHealthImage from '../../catGameImages/zeroHealthImage.jpg';
 
-export default function CatGame() {
+export default function DogGame() {
   const healthImages = {
-    0: zeroHealthImage,
+    0: zeroHealthImage, // Add image for health level 0
     1: lowHealthImage,
     2: lowHealthImage,
     3: mediumHealthImage,
@@ -61,18 +60,19 @@ export default function CatGame() {
   };
 
   const catFactsArray = catInstruction.map((instruction, index) => {
-    const key = catButtons[index].toLowerCase();
-    return { instruction, facts: catFact[key] };
+    const key = catButtons[index].toLowerCase(); //getting key corresponding to the button
+    return { instruction, facts: catFact[key] }; // Create object with instruction and corresponding facts
   });
 
   const [currentInstructionIndex, setCurrentInstructionIndex] = useState(0);
   const [pet, setPet] = useState(null);
-  const [health, setHealth] = useState(5);
+  const [health, setHealth] = useState(5); // State variable to track health
   const [currentImage, setCurrentImage] = useState(highHealthImage); 
   const [changeState] = useState(true);
   const [currentFacts, setCurrentFacts] = useState(catFactsArray[currentInstructionIndex].facts[0]);
-  const { id } = useParams();
+  const {id} = useParams();
 
+  // Function shuffles and sets new instruction index
   const shuffleInstruction = (buttonIndex) => {
     if (buttonIndex === currentInstructionIndex) {
       if (health < 5) {
@@ -133,23 +133,23 @@ export default function CatGame() {
   }
 
   return (
-    <div className="min-h-screen bg-FFE7D6 flex flex-col justify-center items-center">
-      <img src={currentImage} alt="Pet Image" className="mb-4 rounded-full h-48 w-48 object-cover" />
-      <h1 className="text-3xl font-bold mb-4">{pet ? pet.petName : "Cat Game"}</h1>
+    <>
+      <h1>{pet ? pet.petName : "Cat Game"}</h1>
+      <img src={currentImage} alt="Pet Image" />
 
       {health > 0 && (
-        <div className="details bg-white rounded-lg shadow-md p-4 mb-4">
+        <div className="details">
           <div className="petInfo">
-            <h4 className="font-semibold mb-2">Pet Info</h4>
+            <h4>Pet Info</h4>
             <p>Health: {health}❤️</p>
-            {health === 1 && <p className="text-red-600">You're about to kill me</p>}
+            {health === 1 && <p>You're about to kill me</p>}
           </div>
 
-          <ul className="careInstructions mt-4">
-            <h2 className="font-semibold mb-2">Instructions</h2>
+          <ul className="careInstructions">
+            <h2>Instructions</h2>
             <CatInstruction careInstructions={[catInstruction[currentInstructionIndex]]} />
             <ul>
-              <li className="text-sm">{currentFacts}</li>
+              {currentFacts}
             </ul>
           </ul>
         </div>
@@ -157,28 +157,17 @@ export default function CatGame() {
 
       {health <= 0 && (
         <>
-        <p className="text-red-600">You killed me, how could you?</p>
+        <p>You killed me, how could you?</p>
         <p>(Don't worry, we can start over, just hit refresh)</p>
         </>
       )}
 
       {health > 0 && (
         <div className="game">
-          <h2 className="font-semibold mb-2">Cat Care Buttons</h2>
-          <div className="flex flex-wrap gap-2">
-            {catButtons.map((button, index) => (
-              <button
-                key={index}
-                onClick={() => shuffleInstruction(index)}
-                className="bg-purple-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-purple-700"
-              >
-                {button}
-              </button>
-            ))}
-          </div>
+          <h2>Cat Care Buttons</h2>
+          <CatButton buttons={catButtons} onClick={shuffleInstruction} />
         </div>
       )}
-      <ChatBot />
-    </div>
+    </>
   );
 }

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as petsApi from '../../utilities/pets-api';
+// import AuthPage from '../../pages/AuthPage/AuthPage';
+// import { getUser } from '../../utilities/users-service';
 
 export default function CreatePetForm() {
   const navigate = useNavigate();
@@ -8,6 +10,7 @@ export default function CreatePetForm() {
     petName: '',
     petType: '', // Adding petType field
     health: 5,
+    // user: '' 
   });
 
   const handleChange = (e) => {
@@ -27,6 +30,7 @@ export default function CreatePetForm() {
         petName: '',
         petType: '', // Reset petType field
         health: 5,
+        // user: '' 
       });
       navigate(`/pets/${newPet._id}`);
       // Handle success, e.g., show a success message

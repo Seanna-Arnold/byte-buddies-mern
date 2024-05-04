@@ -51,28 +51,29 @@ export default function MainPage() {
   }
 
   return (
-    <>
-      <h1>Pet Dashboard</h1>
-      <br></br>
+    <div className="min-h-screen bg-gradient-to-r from-pink-200 to-purple-200 flex flex-col justify-center items-center">
+      <h1 className="text-6xl text-pink-900 font-bold mb-8">Welcome to Pet Dashboard 🐾</h1>
       <CreateCat addPet={addPets} />
+
       {pets.length !== 0 ?
-      <div>
-        {pets.map(pet => (
-          <div key={pet._id}>
-          <Link to= {`/pets/${pet._id}`}> Care for {pet.petName}</Link>
-          <input
-            type="text"
-            value={pet.petName}
-            onChange={(e) => handleUpdate(pet._id, e.target.value)}
-          />
-          <button onClick={() => handleDelete(pet._id)}>Delete</button>
+        <div className="mt-8 flex flex-wrap justify-center">
+          {pets.map(pet => (
+            <div key={pet._id} className="bg-white rounded-lg shadow-md p-4 m-4">
+              <Link to={`/cats/${pet._id}`} className="text-2xl font-bold text-purple-900 hover:text-purple-600">Care for {pet.petName}</Link>
+              <input
+                type="text"
+                value={pet.petName}
+                onChange={(e) => handleUpdate(pet._id, e.target.value)}
+                className="border border-purple-500 rounded-md ml-4 p-1"
+              />
+              <button className="bg-purple-600 text-white px-4 py-1 ml-2 rounded-md hover:bg-purple-700" onClick={() => handleDelete(pet._id)}>Delete</button>
+            </div>
+          ))}
         </div>
-        ))}
-      </div>
-      :
-      <p>No pets yet</p>
-    }
-    <ChatBot />
-    </>
+        :
+        <p className="text-2xl text-purple-900 font-bold mt-8">No pets yet 😿</p>
+      }
+      
+    </div>
   );
 }

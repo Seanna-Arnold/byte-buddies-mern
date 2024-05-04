@@ -26,9 +26,7 @@ async function show(req, res) {
 
 async function create(req, res) {
   try {
-    console.log(Pet)
-    // req.body.user = req.user;
-    console.log(req.body)
+    req.body.user = req.user;
     const pet = await Pet.create(req.body);
     res.json(pet);
   } catch (err) {
