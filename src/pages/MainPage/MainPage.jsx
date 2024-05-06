@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import * as petsApi from "../../utilities/pets-api";
 import CreateCat from "../../components/CreatePet/CreatePet";
-import ChatBot from "../ChatBot/ChatBot";
 
 export default function MainPage() {
   const [pets, setPets] = useState([]);
@@ -40,6 +39,7 @@ export default function MainPage() {
       console.error("Error deleting pet:", error);
     }
   }
+  
   async function handleUpdate(id, newName) {
     try {
       await petsApi.updatePet(id, { petName: newName });
@@ -51,22 +51,29 @@ export default function MainPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-pink-200 to-purple-200 flex flex-col justify-center items-center">
-      <h1 className="text-6xl text-pink-900 font-bold mb-8">Welcome to Pet Dashboard 🐾</h1>
+    <div className="min-h-screen flex flex-col justify-center items-center">
+      <h1 className="text-6xl text-pink-900 font-bold mb-8">Welcome to Byte Buddies 🐾</h1>
       <CreateCat addPet={addPets} />
 
       {pets.length !== 0 ?
         <div className="mt-8 flex flex-wrap justify-center">
           {pets.map(pet => (
             <div key={pet._id} className="bg-white rounded-lg shadow-md p-4 m-4">
-              <Link to={`/cats/${pet._id}`} className="text-2xl font-bold text-purple-900 hover:text-purple-600">Care for {pet.petName}</Link>
+              <Link to={pet.petType === 'cat' ? `/cats/${pet._id}` : `/dogs/${pet._id}`} className="text-2xl font-bold hover:text-blue-600">
+                Care for {pet.petName} {pet.petType === 'cat' ? '🐱' : '🐶'}
+              </Link>
               <input
                 type="text"
                 value={pet.petName}
                 onChange={(e) => handleUpdate(pet._id, e.target.value)}
                 className="border border-purple-500 rounded-md ml-4 p-1"
               />
-              <button className="bg-purple-600 text-white px-4 py-1 ml-2 rounded-md hover:bg-purple-700" onClick={() => handleDelete(pet._id)}>Delete</button>
+              <button
+                className="bg-purple-600 text-white px-4 py-1 ml-2 rounded-md hover:bg-purple-700"
+                onClick={() => handleDelete(pet._id)}
+              >
+                Delete
+              </button>
             </div>
           ))}
         </div>

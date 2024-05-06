@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as petsApi from '../../utilities/pets-api';
-// import AuthPage from '../../pages/AuthPage/AuthPage';
-// import { getUser } from '../../utilities/users-service';
 
 export default function CreatePetForm() {
   const navigate = useNavigate();
@@ -10,7 +8,6 @@ export default function CreatePetForm() {
     petName: '',
     petType: '', // Adding petType field
     health: 5,
-    // user: '' 
   });
 
   const handleChange = (e) => {
@@ -30,9 +27,7 @@ export default function CreatePetForm() {
         petName: '',
         petType: '', // Reset petType field
         health: 5,
-        // user: '' 
       });
-      navigate(`/pets/${newPet._id}`);
       // Handle success, e.g., show a success message
     } catch (error) {
       console.error('Error creating pet:', error);
@@ -40,32 +35,41 @@ export default function CreatePetForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
+    <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-md p-6 flex items-center">
+      <label className="block text-gray-700 text-sm font-semibold mr-4" htmlFor="petName">
         Pet Name:
-        <input
-          type="text"
-          name="petName"
-          value={formData.petName}
-          onChange={handleChange}
-          required
-        />
       </label>
-      <label>
+      <input
+        className="appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mr-4"
+        id="petName"
+        type="text"
+        name="petName"
+        value={formData.petName}
+        onChange={handleChange}
+        required
+      />
+      <label className="block text-gray-700 text-sm font-semibold mr-4" htmlFor="petType">
         Pet Type:
-        <select
-          name="petType"
-          value={formData.petType}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Select Pet Type</option>
-          <option value="cat">Cat</option>
-          <option value="dog">Dog</option>
-        </select>
       </label>
-      {/* Add other input fields for health, emotion, careInstructions, buttons, infoPopup */}
-      <button type="submit">Create Pet</button>
+      <select
+        className="appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mr-4"
+        id="petType"
+        name="petType"
+        value={formData.petType}
+        onChange={handleChange}
+        required
+      >
+        <option value="">select pet type  </option>
+        <option value="cat">Cat</option>
+        <option value="dog">Dog</option>
+      </select>
+      <button
+        className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-10 rounded focus:outline-none focus:shadow-outline whitespace-nowrap"
+        type="submit"
+      >
+  Create Pet
+</button>
+
     </form>
   );
 }

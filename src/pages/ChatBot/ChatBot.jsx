@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import {
   MainContainer,
@@ -8,6 +8,7 @@ import {
   MessageInput,
   TypingIndicator,
 } from '@chatscope/chat-ui-kit-react';
+import "./ChatBot.css"
 
 const API_KEY = process.env.REACT_APP_OPEN_API_KEY;
 
@@ -20,6 +21,25 @@ const ChatBot = () => {
     },
   ]);
   const [isTyping, setIsTyping] = useState(false);
+  const [showChat, setShowChat] = useState(false); // State to toggle chat visibility
+  const chatContainerRef = useRef(null); // Ref for chat container
+
+  const handleToggleChat = () => {
+    setShowChat(!showChat);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (chatContainerRef.current && !chatContainerRef.current.contains(event.target)) {
+        setShowChat(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleSendRequest = async (message) => {
     const newMessage = {
@@ -48,7 +68,6 @@ const ChatBot = () => {
       setIsTyping(false);
     }
   };
-  
 
   async function processMessageToPetBot(chatMessages) {
     const apiMessages = chatMessages.map((messageObject) => {
@@ -77,22 +96,31 @@ const ChatBot = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-pink-200 to-purple-200 flex flex-col justify-center items-center">
-      <h1 className="text-3xl font-bold mb-4">Chat with PetBot 🐾</h1>
-      <div className="relative rounded-lg overflow-hidden w-96 h-96">
-        <MainContainer>
-          <ChatContainer className="bg-fff3eb rounded-lg shadow-md">
-            <MessageList 
-              scrollBehavior="smooth" 
-              typingIndicator={isTyping ? <TypingIndicator content="PetBot is typing" /> : null}
-            >
-              {messages.map((message, i) => {
-                return <Message key={i} model={message} />
-              })}
-            </MessageList>
-            <MessageInput placeholder="Ask me anything about pets!" onSend={handleSendRequest} />        
-          </ChatContainer>
-        </MainContainer>
+    <div className="flex flex-col justify-center items-center">
+<button 
+  className="bg-blue-500 text-white w-16 h-16 flex items-center justify-center rounded-full mb-4 text-xs" 
+  onClick={handleToggleChat}
+>
+  {showChat ? 'Done? 🐾' : 'Chat 🐾'}
+</button>
+
+
+      <div className={`relative ${showChat ? 'block' : 'hidden'}`}>
+        <div ref={chatContainerRef} className="chat-container">
+          <MainContainer>
+            <ChatContainer className="bg-fff3eb rounded-lg shadow-md">
+              <MessageList 
+                scrollBehavior="smooth" 
+                typingIndicator={isTyping ? <TypingIndicator content="PetBot is typing" /> : null}
+              >
+                {messages.map((message, i) => {
+                  return <Message key={i} model={message} />
+                })}
+              </MessageList>
+              <MessageInput placeholder="Ask me anything about pets!" onSend={handleSendRequest} />        
+            </ChatContainer>
+          </MainContainer>
+        </div>
       </div>
     </div>
   )

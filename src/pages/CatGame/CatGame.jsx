@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import CatButton from '../../components/CatButton/CatButton';
+// import CatButton from '../../components/CatButton/CatButton';
 import ChatBot from '../ChatBot/ChatBot';
 
 import CatInstruction from '../../components/CatInstruction/CatInstruction';
@@ -133,7 +133,7 @@ export default function CatGame() {
   }
 
   return (
-    <div className="min-h-screen bg-FFE7D6 flex flex-col justify-center items-center">
+    <div className="relative min-h-screen bg-FFE7D6 flex flex-col justify-center items-center">
       <img src={currentImage} alt="Pet Image" className="mb-4 rounded-full h-48 w-48 object-cover" />
       <h1 className="text-3xl font-bold mb-4">{pet ? pet.petName : "Cat Game"}</h1>
 
@@ -178,7 +178,9 @@ export default function CatGame() {
           </div>
         </div>
       )}
-      <ChatBot />
+      <div className="absolute bottom-16 right-20">
+        <ChatBot />
+      </div>
     </div>
   );
 }

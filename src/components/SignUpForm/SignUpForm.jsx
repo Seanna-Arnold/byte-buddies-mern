@@ -22,14 +22,9 @@ export default class SignUpForm extends Component {
     try {
       const {name, email, password} = this.state;
       const formData = {name, email, password};
-      // The promise returned by the signUp service
-      // method will resolve to the user object included
-      // in the payload of the JSON Web Token (JWT)
       const user = await signUp(formData);
       this.props.setUser(user);
     } catch {
-      // An error occurred
-      // Probably due to a duplicate email
       this.setState({ error: 'Sign Up Failed - Try Again' });
     }
   };
@@ -38,20 +33,20 @@ export default class SignUpForm extends Component {
     const disable = this.state.password !== this.state.confirm;
     return (
       <div>
-        <div className="form-container">
+        <div className="form-container max-w-md mx-auto px-4 py-8">
           <form autoComplete="off" onSubmit={this.handleSubmit}>
-            <label>Name</label>
-            <input type="text" name="name" value={this.state.name} onChange={this.handleChange} required />
-            <label>Email</label>
-            <input type="email" name="email" value={this.state.email} onChange={this.handleChange} required />
-            <label>Password</label>
-            <input type="password" name="password" value={this.state.password} onChange={this.handleChange} required />
-            <label>Confirm</label>
-            <input type="password" name="confirm" value={this.state.confirm} onChange={this.handleChange} required />
-            <button type="submit" disabled={disable}>SIGN UP</button>
+            <label className="block mb-2 font-semibold">Name</label>
+            <input type="text" name="name" value={this.state.name} onChange={this.handleChange} className="block w-full border border-gray-300 rounded-md px-3 py-2 mb-3 focus:outline-none" required />
+            <label className="block mb-2 font-semibold">Email</label>
+            <input type="email" name="email" value={this.state.email} onChange={this.handleChange} className="block w-full border border-gray-300 rounded-md px-3 py-2 mb-3 focus:outline-none" required />
+            <label className="block mb-2 font-semibold">Password</label>
+            <input type="password" name="password" value={this.state.password} onChange={this.handleChange} className="block w-full border border-gray-300 rounded-md px-3 py-2 mb-3 focus:outline-none" required />
+            <label className="block mb-2 font-semibold">Confirm</label>
+            <input type="password" name="confirm" value={this.state.confirm} onChange={this.handleChange} className="block w-full border border-gray-300 rounded-md px-3 py-2 mb-3 focus:outline-none" required />
+            <button type="submit" disabled={disable} className="block w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-md disabled:bg-gray-400 disabled:cursor-not-allowed">SIGN UP</button>
           </form>
         </div>
-        <p className="error-message">&nbsp;{this.state.error}</p>
+        <p className="error-message text-red-600">{this.state.error}</p>
       </div>
     );
   }
