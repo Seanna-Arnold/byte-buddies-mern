@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 // import CatButton from '../../components/CatButton/CatButton';
 import ChatBot from '../ChatBot/ChatBot';
 
-import CatInstruction from '../../components/CatInstruction/CatInstruction';
+import PetInstruction from '../../components/PetInstruction/PetInstruction';
 import * as petsApi from "../../utilities/pets-api";
 import lowHealthImage from '../../catGameImages/lowHealthImage.jpg';
 import mediumHealthImage from '../../catGameImages/mediumHealthImage.jpg';
@@ -147,7 +147,7 @@ export default function CatGame() {
 
           <ul className="careInstructions mt-4">
             <h2 className="font-semibold mb-2">Instructions</h2>
-            <CatInstruction careInstructions={[catInstruction[currentInstructionIndex]]} />
+            <PetInstruction careInstructions={[catInstruction[currentInstructionIndex]]} />
             <ul>
               <li className="text-sm">{currentFacts}</li>
             </ul>

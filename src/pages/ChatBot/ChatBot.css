@@ -1,6 +1,6 @@
 .chat-container {
-    height: 400px; /* Set a fixed height */
-    overflow-y: auto; /* Enable vertical scrolling */
+    height: 400px;
+    overflow-y: auto;
     width: 400px;
   }
   

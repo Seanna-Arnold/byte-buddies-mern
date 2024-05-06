@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import * as petsApi from "../../utilities/pets-api";
-import CreateCat from "../../components/CreatePet/CreatePet";
+import CreatePet from "../../components/CreatePet/CreatePet";
 
 export default function MainPage() {
   const [pets, setPets] = useState([]);
@@ -23,7 +23,6 @@ export default function MainPage() {
   async function addPets(pet) {
     try {
       await petsApi.createPet(pet);
-      fetchPets();
       setChangeState(prevState => !prevState);
     } catch (error) {
       console.error("Error adding pet:", error);
@@ -53,7 +52,7 @@ export default function MainPage() {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
       <h1 className="text-6xl text-pink-900 font-bold mb-8">Welcome to Byte Buddies 🐾</h1>
-      <CreateCat addPet={addPets} />
+      <CreatePet addPet={addPets} />
 
       {pets.length !== 0 ?
         <div className="mt-8 flex flex-wrap justify-center">

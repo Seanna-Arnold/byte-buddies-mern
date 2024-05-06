@@ -8,11 +8,11 @@ module.exports = {
   remove
 };
 
+
 async function index(req, res) {
   try {
     console.log(Pet)
-  const pets = await Pet.find({});
-  // re-sort based upon the sortOrder of the populated categories
+  const pets = await Pet.find({user: req.user});
   res.json(pets);
   } catch (error) {
   res.status(500).json({ error: error.message });

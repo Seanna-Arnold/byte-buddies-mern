@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 // import CatButton from '../../components/CatButton/CatButton';
 import ChatBot from '../ChatBot/ChatBot';
 
-// import CatInstruction from '../../components/CatInstruction/CatInstruction';
+import PetInstruction from '../../components/PetInstruction/PetInstruction';
 import * as petsApi from "../../utilities/pets-api";
 import lowHealthImage from '../../catGameImages/lowHealthImage.jpg';
 import mediumHealthImage from '../../catGameImages/mediumHealthImage.jpg';
@@ -12,7 +12,7 @@ import zeroHealthImage from '../../catGameImages/zeroHealthImage.jpg';
 
 export default function DogGame() {
   const healthImages = {
-    0: zeroHealthImage, // Add image for health level 0
+    0: zeroHealthImage,
     1: lowHealthImage,
     2: lowHealthImage,
     3: mediumHealthImage,
@@ -67,18 +67,18 @@ export default function DogGame() {
   
 
   const dogFactsArray = dogInstruction.map((instruction, index) => {
-    const key = dogButtons[index].toLowerCase(); //getting key corresponding to the button
+    const key = dogButtons[index]; //getting key corresponding to the button
     return { instruction, facts: dogFact[key] }; // Create object with instruction and corresponding facts
   });
-
+  
   const [currentInstructionIndex, setCurrentInstructionIndex] = useState(0);
   const [pet, setPet] = useState(null);
   const [health, setHealth] = useState(5); // State variable to track health
   const [currentImage, setCurrentImage] = useState(highHealthImage); 
   const [changeState] = useState(true);
+  console.log(dogFactsArray)
   const [currentFacts, setCurrentFacts] = useState(dogFactsArray[currentInstructionIndex].facts[0]);
   const {id} = useParams();
-
   // Function shuffles and sets new instruction index
   const shuffleInstruction = (buttonIndex) => {
     if (buttonIndex === currentInstructionIndex) {
@@ -154,7 +154,7 @@ export default function DogGame() {
 
           <ul className="careInstructions mt-4">
             <h2 className="font-semibold mb-2">Instructions</h2>
-            {/* <CatInstruction careInstructions={[dogInstruction[currentInstructionIndex]]} /> */}
+            <PetInstruction careInstructions={[dogInstruction[currentInstructionIndex]]} />
             <ul>
               <li className="text-sm">{currentFacts}</li>
             </ul>

@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as petsApi from '../../utilities/pets-api';
 
-export default function CreatePetForm() {
+export default function CreatePet({ addPet }) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     petName: '',
-    petType: '', // Adding petType field
+    petType: '',
     health: 5,
   });
 
@@ -21,14 +21,14 @@ export default function CreatePetForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const newPet = await petsApi.createPet(formData);
+      addPet(formData)
       // Optionally, you can reset the form after submission
       setFormData({
         petName: '',
-        petType: '', // Reset petType field
-        health: 5,
+        petType: '',
+        health: '',
       });
-      // Handle success, e.g., show a success message
+      // Handle success, show a success message
     } catch (error) {
       console.error('Error creating pet:', error);
     }

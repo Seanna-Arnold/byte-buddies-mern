@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Assuming you have access to the `buttons` array in your component props
-function CatInstruction({ careInstructions }) {
+function PetInstruction({ careInstructions }) {
   return (
     <ul>
       {careInstructions.map((instruction, index) => (
@@ -13,4 +13,4 @@ function CatInstruction({ careInstructions }) {
   );
 }
 
-export default CatInstruction;
+export default PetInstruction;
