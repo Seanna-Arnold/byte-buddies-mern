@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import * as petsApi from "../../utilities/pets-api";
 import CreatePet from "../../components/CreatePet/CreatePet";
+import Image from '../../StockIllustrations/vecteezy_set-of-pets-animals_11143527.jpg'
 
 export default function MainPage() {
   const [pets, setPets] = useState([]);
@@ -50,8 +51,9 @@ export default function MainPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center">
-      <h1 className="text-6xl font-bold mb-8">Welcome to Byte Buddies 🐾</h1>
+    <div className="min-h-screen flex flex-col justify-center items-center -mt-6">
+      <img src={Image} alt="" class="mainimg" />
+      <h1 className="text-5xl font-bold mb-8">Welcome to Byte Buddies 🐾</h1>
       <CreatePet addPet={addPets} />
 
       {pets.length !== 0 ?

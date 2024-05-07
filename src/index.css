@@ -185,3 +185,11 @@ a:hover {
   background-color: #D8E9E1;
   padding: 20px;
 }
+
+.authimg {
+  width: 180px;
+}
+
+.mainimg {
+  width: 200px;
+}
