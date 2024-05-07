@@ -64,7 +64,6 @@ export default function DogGame() {
       "Accidents are inevitable during the potty training process. When accidents occur indoors, clean them up promptly and avoid punishment, as it can confuse and stress your dog."
     ]
   };
-  
 
   const dogFactsArray = dogInstruction.map((instruction, index) => {
     const key = dogButtons[index]; //getting key corresponding to the button
@@ -147,16 +146,15 @@ export default function DogGame() {
       {health > 0 && (
         <div className="details bg-white rounded-lg shadow-md p-4 mb-4">
           <div className="petInfo">
-            <h4 className="font-semibold mb-2">Pet Info</h4>
             <p>Health: {health}❤️</p>
             {health === 1 && <p className="text-red-600">You're about to kill me</p>}
           </div>
 
           <ul className="careInstructions mt-4">
-            <h2 className="font-semibold mb-2">Instructions</h2>
-            <PetInstruction careInstructions={[dogInstruction[currentInstructionIndex]]} />
-            <ul>
-              <li className="text-sm">{currentFacts}</li>
+            <h2 className="font-semibold mb-2">Instructions:</h2>
+            <PetInstruction careInstructions={[dogInstruction[currentInstructionIndex]]} /><br/>
+            <ul id="instructions" className="p-4 rounded-lg">
+              <li className="text-sm"><span className="text-lg">💡</span> {currentFacts}</li>
             </ul>
           </ul>
         </div>
@@ -177,7 +175,7 @@ export default function DogGame() {
               <button
                 key={index}
                 onClick={() => shuffleInstruction(index)}
-                className="bg-purple-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-purple-700"
+                className="px-4 py-2 rounded-md shadow-md"
               >
                 {button}
               </button>
@@ -185,7 +183,9 @@ export default function DogGame() {
           </div>
         </div>
       )}
-      <ChatBot />
+      <div className="absolute bottom-16 right-20">
+        <ChatBot />
+      </div>
     </div>
   );
 }

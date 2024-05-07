@@ -6,6 +6,7 @@ import AuthPage from '../AuthPage/AuthPage';
 import MainPage from '../MainPage/MainPage';
 import CatGame from '../CatGame/CatGame';
 import DogGame from '../DogGame/DogGame';
+import RabbitGame from '../RabbitGame/RabbitGame';
 import NavBar from '../../components/NavBar/NavBar';
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
               {/* Route components in here */}
               <Route path="/cats/:id" element={<CatGame />} />
               <Route path="/dogs/:id" element={<DogGame />} />
+              <Route path="/dogs/:id" element={<RabbitGame />} />
 
               <Route path="/" element={<MainPage />} />
             </Routes>

@@ -133,23 +133,22 @@ export default function CatGame() {
   }
 
   return (
-    <div className="relative min-h-screen bg-FFE7D6 flex flex-col justify-center items-center">
+    <div className="min-h-screen bg-FFE7D6 flex flex-col justify-center items-center">
       <img src={currentImage} alt="Pet Image" className="mb-4 rounded-full h-48 w-48 object-cover" />
       <h1 className="text-3xl font-bold mb-4">{pet ? pet.petName : "Cat Game"}</h1>
 
       {health > 0 && (
         <div className="details bg-white rounded-lg shadow-md p-4 mb-4">
           <div className="petInfo">
-            <h4 className="font-semibold mb-2">Pet Info</h4>
             <p>Health: {health}❤️</p>
             {health === 1 && <p className="text-red-600">You're about to kill me</p>}
           </div>
 
           <ul className="careInstructions mt-4">
-            <h2 className="font-semibold mb-2">Instructions</h2>
-            <PetInstruction careInstructions={[catInstruction[currentInstructionIndex]]} />
-            <ul>
-              <li className="text-sm">{currentFacts}</li>
+            <h2 className="font-semibold mb-2">Instructions:</h2>
+            <PetInstruction careInstructions={[catInstruction[currentInstructionIndex]]} /><br/>
+            <ul id="instructions" className="p-4 rounded-lg">
+              <li className="text-sm"><span className="text-lg">💡</span> {currentFacts}</li>
             </ul>
           </ul>
         </div>
@@ -170,9 +169,9 @@ export default function CatGame() {
               <button
                 key={index}
                 onClick={() => shuffleInstruction(index)}
-                className="bg-purple-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-purple-700"
+                className="px-4 py-2 rounded-md shadow-md"
               >
-                {button}
+              {button}
               </button>
             ))}
           </div>

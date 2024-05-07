@@ -155,3 +155,33 @@ button[type="submit"] {
   grid-column: span 2;
   margin: 1vmin 0 0;
 } */
+
+button {
+  background-color: #E0D6FF;
+  color: #3A1704;
+  border: 1px solid #3A1704
+}
+
+button:hover {
+  background-color: #A8A6C9;
+  color: white;
+}
+
+input {
+  border: 1px solid #E0D6FF;
+  
+}
+
+* {
+  color: #3A1704;
+}
+
+
+a:hover {
+  color: #A8A6C9;
+}
+
+#instructions {
+  background-color: #D8E9E1;
+  padding: 20px;
+}

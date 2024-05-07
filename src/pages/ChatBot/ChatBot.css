@@ -3,4 +3,53 @@
     overflow-y: auto;
     width: 400px;
   }
-  
+
+  .bg-blue-500 {
+    --tw-bg-opacity: 1;
+    background-color: #E0D6FF;
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: #3A1704;
+}
+
+.cs-message--outgoing .cs-message__content {
+  color: rgba(0, 0, 0, .87);
+  background-color: #E0D6FF;
+  border-radius: .7em 0 0 .7em;
+}
+
+.cs-message-input__content-editor-wrapper {
+  box-sizing: border-box;
+  position: relative;
+  background-color: #E0D6FF;
+  margin: 0;
+  padding: .6em .9em;
+  border-radius: .7em;
+  flex-grow: 1;
+}
+
+.cs-message-input__content-editor {
+  box-sizing: border-box;
+  flex-grow: 1;
+  background-color: #E0D6FF;
+  font-family: Helvetica Neue, Segoe UI, Helvetica, Arial, sans-serif;
+  outline: 0;
+  border-top: 0 none;
+  border-right: 0 none;
+  border-bottom: 0 none;
+  border-left: 0 none;
+  overflow: visible;
+  color: rgba(0, 0, 0, .87);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.cs-message-input__content-editor[data-placeholder]:empty:before {
+  box-sizing: border-box;
+  content: attr(data-placeholder);
+  color: rgba(58, 23, 4, .5);
+  display: block;
+  cursor: text;
+}

@@ -97,12 +97,14 @@ const ChatBot = () => {
 
   return (
     <div className="flex flex-col justify-center items-center">
-<button 
-  className="bg-blue-500 text-white w-16 h-16 flex items-center justify-center rounded-full mb-4 text-xs" 
-  onClick={handleToggleChat}
->
-  {showChat ? 'Done? 🐾' : 'Chat 🐾'}
-</button>
+  <button 
+    className={`bg-blue-500 text-white w-16 h-16 flex items-center justify-center rounded-full mb-4 text-xs ${showChat ? '' : 'animate-pulse'}`} 
+    onClick={handleToggleChat}
+  >
+    {showChat ? 'Done? 🐾' : 'Chat 🐾'}
+  </button>
+
+
 
 
       <div className={`relative ${showChat ? 'block' : 'hidden'}`}>
