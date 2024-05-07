@@ -134,7 +134,7 @@ export default function CatGame() {
 
   return (
     <div className="min-h-screen bg-FFE7D6 flex flex-col justify-center items-center">
-      <img src={currentImage} alt="Pet Image" className="mb-4 h-48 w-48 object-cover" />
+      <img src={currentImage} alt="Pet Image" className="mb-4 h-48 w-55 object-cover" />
       <h1 className="text-3xl font-bold mb-4">{pet ? pet.petName : "Cat Game"}</h1>
 
       {health > 0 && (
