@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import * as petsApi from '../../utilities/pets-api';
+// import { useNavigate } from 'react-router-dom';
+// import * as petsApi from '../../utilities/pets-api';
 
 export default function CreatePet({ addPet }) {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [formData, setFormData] = useState({
     petName: '',
     petType: '',
