@@ -3,10 +3,10 @@ import { useParams } from 'react-router-dom';
 import ChatBot from '../ChatBot/ChatBot';
 import PetInstruction from '../../components/PetInstruction/PetInstruction';
 import * as petsApi from "../../utilities/pets-api";
-import lowHealthImage from '../../catGameImages/lowHealthImage.jpg';
-import mediumHealthImage from '../../catGameImages/mediumHealthImage.jpg';
-import highHealthImage from '../../catGameImages/highHealthImage.jpg';
-import zeroHealthImage from '../../catGameImages/zeroHealthImage.jpg';
+import lowHealthImage from '../../rabbitGameImages/lowHealthImage.png';
+import mediumHealthImage from '../../rabbitGameImages/mediumHealthImage.png';
+import highHealthImage from '../../rabbitGameImages/highHealthImage.png';
+import zeroHealthImage from '../../rabbitGameImages/zeroHealthImage.png';
 
 export default function RabbitGame() {
   const healthImages = {
@@ -134,7 +134,7 @@ export default function RabbitGame() {
 
   return (
     <div className="min-h-screen bg-FFE7D6 flex flex-col justify-center items-center">
-      <img src={currentImage} alt="Pet Image" className="mb-4 rounded-full h-48 w-48 object-cover" />
+      <img src={currentImage} alt="Pet Image" className="mb-4 h-48 w-48 object-cover" />
       <h1 className="text-3xl font-bold mb-4">{pet ? pet.petName : "Rabbit Game"}</h1>
 
       {health > 0 && (
@@ -156,7 +156,7 @@ export default function RabbitGame() {
 
       {health <= 0 && (
         <>
-        <p className="text-red-600">You harmed me, how could you?</p>
+        <p className="text-red-600">You killed me, how could you?</p>
         <p>(Don't worry, we can start over, just hit refresh)</p>
         </>
       )}
