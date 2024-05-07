@@ -21,7 +21,7 @@ export default function App() {
               {/* Route components in here */}
               <Route path="/cats/:id" element={<CatGame />} />
               <Route path="/dogs/:id" element={<DogGame />} />
-              <Route path="/dogs/:id" element={<RabbitGame />} />
+              <Route path="/rabbits/:id" element={<RabbitGame />} />
 
               <Route path="/" element={<MainPage />} />
             </Routes>
