@@ -54,5 +54,6 @@ https://trello.com/b/cMFN02g5/mern-capstone
 # Next Steps
 
 - Responsivity and additional pet types
-- separate side game
+- More pet detail options
+- Side game
 - Create a shelter feel by having allowing users to choose a pet already hard coded
