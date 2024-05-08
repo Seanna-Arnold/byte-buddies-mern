@@ -38,6 +38,7 @@ Byte Buddies also offers a fun and educational experience for players interested
 - Express.js
 - Node.js
 - React
+- Tailwind css
 - Chat openAI API
 - Figma
 
