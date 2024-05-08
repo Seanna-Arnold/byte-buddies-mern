@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-// import CatButton from '../../components/CatButton/CatButton';
 import ChatBot from '../ChatBot/ChatBot';
 
 import PetInstruction from '../../components/PetInstruction/PetInstruction';

@@ -141,7 +141,7 @@ export default function RabbitGame() {
         <div className="details bg-white rounded-lg shadow-md p-4 mb-4">
           <div className="petInfo">
             <p>Health: {health}❤️</p>
-            {health === 1 && <p className="text-red-600">You're about to harm me</p>}
+            {health === 1 && <p className="text-red-600">You're about to kill me</p>}
           </div>
 
           <ul className="careInstructions mt-4">

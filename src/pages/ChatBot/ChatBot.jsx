@@ -21,8 +21,8 @@ const ChatBot = () => {
     },
   ]);
   const [isTyping, setIsTyping] = useState(false);
-  const [showChat, setShowChat] = useState(false); // State to toggle chat visibility
-  const chatContainerRef = useRef(null); // Ref for chat container
+  const [showChat, setShowChat] = useState(false);
+  const chatContainerRef = useRef(null);
 
   const handleToggleChat = () => {
     setShowChat(!showChat);
@@ -107,25 +107,24 @@ const ChatBot = () => {
 
 
 
-      <div className={`relative ${showChat ? 'block' : 'hidden'}`}>
-        <div ref={chatContainerRef} className="chat-container">
-          <MainContainer>
-            <ChatContainer className="bg-fff3eb rounded-lg shadow-md">
-              <MessageList 
-                scrollBehavior="smooth" 
-                typingIndicator={isTyping ? <TypingIndicator content="PetBot is typing" /> : null}
-              >
-                {messages.map((message, i) => {
-                  return <Message key={i} model={message} />
-                })}
-              </MessageList>
-              <MessageInput placeholder="Ask me anything about pets!" onSend={handleSendRequest} />        
-            </ChatContainer>
-          </MainContainer>
-        </div>
-      </div>
+  <div className={`relative ${showChat ? 'block' : 'hidden'}`}>
+    <div ref={chatContainerRef} className="chat-container">
+      <MainContainer>
+      <ChatContainer className="bg-fff3eb rounded-lg shadow-md">
+      <MessageList 
+        scrollBehavior="smooth" 
+        typingIndicator={isTyping ? <TypingIndicator content="PetBot is typing" /> : null}
+      >
+      {messages.map((message, i) => {
+      return <Message key={i} model={message} />
+      })}
+      </MessageList>
+      <MessageInput placeholder="Ask me anything about pets!" onSend={handleSendRequest} />        
+      </ChatContainer>
+      </MainContainer>
     </div>
-  )
-}
+  </div>
+</div>
+)}
 
 export default ChatBot;
