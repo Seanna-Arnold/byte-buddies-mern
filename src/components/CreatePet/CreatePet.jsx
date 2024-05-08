@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import * as petsApi from '../../utilities/pets-api';
 
 export default function CreatePet({ addPet }) {
-  // const navigate = useNavigate();
   const [formData, setFormData] = useState({
     petName: '',
     petType: '',
@@ -22,13 +19,11 @@ export default function CreatePet({ addPet }) {
     e.preventDefault();
     try {
       addPet(formData)
-      // Optionally, you can reset the form after submission
       setFormData({
         petName: '',
         petType: '',
         health: '',
       });
-      // Handle success, show a success message
     } catch (error) {
       console.error('Error creating pet:', error);
     }
